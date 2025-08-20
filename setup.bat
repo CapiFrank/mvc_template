@@ -29,10 +29,7 @@ set OLD_PATH=android\app\src\main\kotlin\com\example\mvc_template
 set NEW_PATH=android\app\src\main\kotlin\com\example\%NEW_NAME%
 ren "%OLD_PATH%" "%NEW_NAME%"
 
-Get-ChildItem -Recurse -Include *.dart | 
-ForEach-Object {
-    (Get-Content $_.FullName) -replace $OLD_NAME, $NEW_NAME | Set-Content $_.FullName
-}
+powershell -Command "Get-ChildItem -Path . -Recurse -Include *.dart | ForEach-Object { (Get-Content $_.FullName) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content $_.FullName }"
 
 :: Activar rename y cambiar nombre y bundleId
 dart pub global activate rename
