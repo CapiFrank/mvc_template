@@ -32,9 +32,9 @@ ren "%OLD_PATH%" "%NEW_NAME%"
 powershell -Command "Get-ChildItem -Path . -Recurse -Include *.dart | ForEach-Object { (Get-Content $_.FullName) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content $_.FullName }"
 
 :: Activar rename y cambiar nombre y bundleId
-dart pub global activate rename
-dart pub global run rename setAppName --targets ios,android,macos,windows,linux --value "%NEW_NAME%"
-dart pub global run rename setBundleId --targets ios,android,macos,windows,linux --value "%BUNDLE_ID%"
+call dart pub global activate rename
+call dart pub global run rename setAppName --targets ios,android,macos,windows,linux --value "%NEW_NAME%"
+call dart pub global run rename setBundleId --targets ios,android,macos,windows,linux --value "%BUNDLE_ID%"
 
 echo Proyecto renombrado correctamente a %NEW_NAME%.
 ENDLOCAL
