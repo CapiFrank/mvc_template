@@ -9,6 +9,8 @@ IF "%~1"=="" (
 SET NEW_NAME=%~1
 SET BUNDLE_ID=com.example.%NEW_NAME%
 SET OLD_NAME=mvc_template
+SET OLD_PATH=android\app\src\main\kotlin\com\example\%OLD_NAME%
+SET NEW_PATH=android\app\src\main\kotlin\com\example\%NEW_NAME%
 
 @REM :: Renombrar carpeta del proyecto
 @REM FOR %%F IN (.) DO SET CURRENT_DIR=%%~nxF
@@ -23,10 +25,9 @@ powershell -Command "(Get-Content pubspec.yaml) -replace '%OLD_NAME%', '%NEW_NAM
 :: Reemplazar en Android (Gradle y manifests)
 powershell -Command "(Get-Content android\app\build.gradle.kts) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\build.gradle.kts"
 powershell -Command "(Get-Content android\app\src\main\AndroidManifest.xml) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\src\main\AndroidManifest.xml"
+powershell -Command "(Get-Content %OLD_PATH%\MainActivity.kt) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content %OLD_PATH%\MainActivity.kt"
 
 :: Renombrar directorio de Kotlin
-set OLD_PATH=android\app\src\main\kotlin\com\example\mvc_template
-set NEW_PATH=android\app\src\main\kotlin\com\example\%NEW_NAME%
 ren "%OLD_PATH%" "%NEW_NAME%"
 
 powershell -Command "Get-ChildItem -Path . -Recurse -Include *.dart | ForEach-Object { (Get-Content $_.FullName) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content $_.FullName }"
