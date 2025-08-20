@@ -21,7 +21,7 @@ SET OLD_NAME=mvc_template
 powershell -Command "(Get-Content pubspec.yaml) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content pubspec.yaml"
 
 :: Reemplazar en Android (Gradle y manifests)
-powershell -Command "(Get-Content android\app\build.gradle.kts) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\build.gradle"
+powershell -Command "(Get-Content android\app\build.gradle.kts) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\build.gradle.kts"
 powershell -Command "(Get-Content android\app\src\main\AndroidManifest.xml) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\src\main\AndroidManifest.xml"
 
 :: Renombrar directorio de Kotlin
