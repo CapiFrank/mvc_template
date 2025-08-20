@@ -31,6 +31,7 @@ mv "$OLD_PATH" "$NEW_PATH"
 find -type f -name "*.dart" -exec sed -i "s/$OLD_NAME/$NEW_NAME/g" {} +
 
 # Activar rename y cambiar nombre y bundleId
+dart pub global activate rps
 dart pub global activate rename
 dart pub global run rename setAppName --targets ios,android,macos,windows,linux --value "$NEW_NAME"
 dart pub global run rename setBundleId --targets ios,android,macos,windows,linux --value "$BUNDLE_ID"
