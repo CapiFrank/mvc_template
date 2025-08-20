@@ -10,16 +10,16 @@ BUNDLE_ID="com.example.$NEW_NAME"
 OLD_NAME="mvc_template"
 
 # Renombrar carpeta principal del proyecto
-OLD_DIR=$(basename "$(pwd)")
-cd ..
-mv "$OLD_DIR" "$NEW_NAME"
-cd "$NEW_NAME"
+# OLD_DIR=$(basename "$(pwd)")
+# cd ..
+# mv "$OLD_DIR" "$NEW_NAME"
+# cd "$NEW_NAME"
 
 # Reemplazar en pubspec.yaml
 sed -i "s/$OLD_NAME/$NEW_NAME/g" pubspec.yaml
 
 # Reemplazar en Android (Gradle y manifest)
-sed -i "s/$OLD_NAME/$NEW_NAME/g" android/app/build.gradle
+sed -i "s/$OLD_NAME/$NEW_NAME/g" android/app/build.gradle.kts
 sed -i "s/$OLD_NAME/$NEW_NAME/g" android/app/src/main/AndroidManifest.xml
 
 # Renombrar directorio Kotlin

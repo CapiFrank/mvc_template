@@ -10,18 +10,18 @@ SET NEW_NAME=%~1
 SET BUNDLE_ID=com.example.%NEW_NAME%
 SET OLD_NAME=mvc_template
 
-:: Renombrar carpeta del proyecto
-FOR %%F IN (.) DO SET CURRENT_DIR=%%~nxF
-echo Renombrando proyecto de !CURRENT_DIR! a %NEW_NAME%
-cd ..
-ren !CURRENT_DIR! %NEW_NAME%
-cd %NEW_NAME%
+@REM :: Renombrar carpeta del proyecto
+@REM FOR %%F IN (.) DO SET CURRENT_DIR=%%~nxF
+@REM echo Renombrando proyecto de !CURRENT_DIR! a %NEW_NAME%
+@REM cd ..
+@REM ren !CURRENT_DIR! %NEW_NAME%
+@REM cd %NEW_NAME%
 
 :: Reemplazar en pubspec.yaml
 powershell -Command "(Get-Content pubspec.yaml) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content pubspec.yaml"
 
 :: Reemplazar en Android (Gradle y manifests)
-powershell -Command "(Get-Content android\app\build.gradle) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\build.gradle"
+powershell -Command "(Get-Content android\app\build.gradle.kts) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\build.gradle"
 powershell -Command "(Get-Content android\app\src\main\AndroidManifest.xml) -replace '%OLD_NAME%', '%NEW_NAME%' | Set-Content android\app\src\main\AndroidManifest.xml"
 
 :: Renombrar directorio de Kotlin
